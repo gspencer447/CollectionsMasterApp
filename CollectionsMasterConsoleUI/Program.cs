@@ -13,42 +13,46 @@ namespace CollectionsMasterConsoleUI
 
             #region Arrays
             //TODO: Create an integer Array of size 50
-            
+            int[] myArray01 = new int[50];
 
             //TODO: Create a method to populate the number array with 50 random numbers that are between 0 and 50
-            
-
+            Populater(myArray01, 0, 50);
             //TODO: Print the first number of the array
+            Console.WriteLine($"The first number in the array is: {myArray01[0]}.");
 
-            //TODO: Print the last number of the array            
-
+            //TODO: Print the last number of the array
+            Console.WriteLine($"The last number of the array is {myArray01[myArray01.Length - 1]}.");
             Console.WriteLine("All Numbers Original");
             //UNCOMMENT this method to print out your numbers from arrays or lists
-            //NumberPrinter();
             Console.WriteLine("-------------------");
 
             //TODO: Reverse the contents of the array and then print the array out to the console.
             //Try for 2 different ways
+
             /*  1) First way, using a custom method => Hint: Array._____(); 
                 2) Second way, Create a custom method (scroll to bottom of page to find ⬇⬇⬇)
             */
 
-            Console.WriteLine("All Numbers Reversed:");
 
+            Console.WriteLine("All Numbers Reversed:");
+            Array.Reverse(myArray01);
+            NumberPrinter(myArray01);
             Console.WriteLine("---------REVERSE CUSTOM------------");
+            ReverseArray(myArray01);
 
             Console.WriteLine("-------------------");
 
             //TODO: Create a method that will set numbers that are a multiple of 3 to zero then print to the console all numbers
             Console.WriteLine("Multiple of three = 0: ");
-            
-
+            ThreeKiller(myArray01);
+            Console.WriteLine(myArray01);
             Console.WriteLine("-------------------");
 
             //TODO: Sort the array in order now
             /*      Hint: Array.____()      */
             Console.WriteLine("Sorted numbers:");
-            
+            Array.Sort(myArray01);
+            NumberPrinter(myArray01);
 
             Console.WriteLine("\n************End Arrays*************** \n");
             #endregion
@@ -104,7 +108,18 @@ namespace CollectionsMasterConsoleUI
 
         private static void ThreeKiller(int[] numbers)
         {
-            
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                if (numbers[i] % 3 == 0)
+                {
+                    numbers[i] = 0;
+                }
+            }
+
+            foreach (int i in numbers)
+            {
+                Console.WriteLine(i);
+            }
         }
 
         private static void OddKiller(List<int> numberList)
@@ -114,6 +129,7 @@ namespace CollectionsMasterConsoleUI
 
         private static void NumberChecker(List<int> numberList, int searchNumber)
         {
+
             
         }
 
@@ -123,15 +139,29 @@ namespace CollectionsMasterConsoleUI
 
         }
 
-        private static void Populater(int[] numbers)
+        private static void Populater(int[] numbers, int min, int max)
         {
             Random rng = new Random();
 
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                numbers[i] = rng.Next(min, max + 1);
+            }
+
+
+            Console.WriteLine("Random numbers in the array:");
+            foreach (int i in numbers)
+            {
+                Console.WriteLine(i);
+            }
         }        
 
         private static void ReverseArray(int[] array)
         {
-            
+            for (int i = array.Length - 1; i >= 0; i--)
+            {
+                Console.WriteLine(array[i]);
+            }
         }
 
         /// <summary>
