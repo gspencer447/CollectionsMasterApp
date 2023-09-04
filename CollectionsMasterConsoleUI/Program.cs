@@ -62,46 +62,52 @@ namespace CollectionsMasterConsoleUI
 
             /*   Set Up   */
             //TODO: Create an integer List
-            
+            var numberList = new List<int>();
 
             //TODO: Print the capacity of the list to the console
-            
+            Console.WriteLine(numberList.Capacity);
 
             //TODO: Populate the List with 50 random numbers between 0 and 50 you will need a method for this            
-            
+            Populater(numberList, 0, 50);
 
             //TODO: Print the new capacity
-            
+            Console.WriteLine(numberList.Capacity);
 
             Console.WriteLine("---------------------");
 
             //TODO: Create a method that prints if a user number is present in the list
             //Remember: What if the user types "abc" accident your app should handle that!
             Console.WriteLine("What number will you search for in the number list?");
-            
+            int searchNumber = 62;
+            NumberChecker(numberList, searchNumber);
             Console.WriteLine("-------------------");
 
             Console.WriteLine("All Numbers:");
             //UNCOMMENT this method to print out your numbers from arrays or lists
-            //NumberPrinter();
+            NumberPrinter(numberList);
             Console.WriteLine("-------------------");
 
 
             //TODO: Create a method that will remove all odd numbers from the list then print results
             Console.WriteLine("Evens Only!!");
-            
+            OddKiller(numberList);
             Console.WriteLine("------------------");
 
             //TODO: Sort the list then print results
             Console.WriteLine("Sorted Evens!!");
-            
+            numberList.Sort();
+            NumberPrinter(numberList);
             Console.WriteLine("------------------");
 
             //TODO: Convert the list to an array and store that into a variable
-            
+            int[] numberArray = numberList.ToArray();
+            NumberPrinter(numberArray);
 
             //TODO: Clear the list
-            
+            Console.WriteLine("-----Cleared list-----");
+            numberList.Clear();
+            NumberPrinter(numberList);
+
 
             #endregion
         }
@@ -124,19 +130,47 @@ namespace CollectionsMasterConsoleUI
 
         private static void OddKiller(List<int> numberList)
         {
-            
+            for (int i = numberList.Count - 1; i >= 0; i--)
+            {
+                if (numberList[i] % 2 != 0)
+                {
+                    numberList.RemoveAt(i);
+                }
+            }
+            foreach(int i in numberList)
+            {
+                Console.WriteLine(i);
+            }
         }
 
         private static void NumberChecker(List<int> numberList, int searchNumber)
         {
+            if (numberList.Contains(searchNumber))
+            {
+                Console.WriteLine($"{searchNumber} is contained within the list!");
+            }
 
+            else if (!numberList.Contains(searchNumber))
+            {
+                Console.WriteLine($"{searchNumber} is not in this list.");
+            }
+
+            else
+            {
+                Console.WriteLine("Please enter a valid number.");
+            }      
             
         }
 
-        private static void Populater(List<int> numberList)
+        private static void Populater(List<int> numberList, int min, int max)
         {
             Random rng = new Random();
 
+            for (int i = 0; i < 50; i++)
+            {
+                int randomNumber = rng.Next(min, max);
+                numberList.Add(randomNumber);
+            }
         }
 
         private static void Populater(int[] numbers, int min, int max)
@@ -144,9 +178,9 @@ namespace CollectionsMasterConsoleUI
             Random rng = new Random();
 
             for (int i = 0; i < numbers.Length; i++)
-            {
-                numbers[i] = rng.Next(min, max + 1);
-            }
+        {
+            numbers[i] = rng.Next(min, max + 1);
+        }
 
 
             Console.WriteLine("Random numbers in the array:");
