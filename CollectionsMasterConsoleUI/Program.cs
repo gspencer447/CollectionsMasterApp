@@ -23,7 +23,7 @@ namespace CollectionsMasterConsoleUI
             //TODO: Print the last number of the array
             Console.WriteLine($"The last number of the array is {myArray01[myArray01.Length - 1]}.");
             Console.WriteLine("All Numbers Original");
-            //UNCOMMENT this method to print out your numbers from arrays or lists
+            NumberPrinter(myArray01);
             Console.WriteLine("-------------------");
 
             //TODO: Reverse the contents of the array and then print the array out to the console.
@@ -62,24 +62,35 @@ namespace CollectionsMasterConsoleUI
 
             /*   Set Up   */
             //TODO: Create an integer List
-            var numberList = new List<int>();
+            List<int> numberList = new List<int>();
 
             //TODO: Print the capacity of the list to the console
+            Console.WriteLine("This is the capacity of the list: ");
             Console.WriteLine(numberList.Capacity);
 
             //TODO: Populate the List with 50 random numbers between 0 and 50 you will need a method for this            
+            Console.WriteLine("Here is the populated list: ");
             Populater(numberList, 0, 50);
+            NumberPrinter(numberList);
 
             //TODO: Print the new capacity
+            Console.WriteLine("This is the new capacity of the list: ");
             Console.WriteLine(numberList.Capacity);
 
             Console.WriteLine("---------------------");
 
             //TODO: Create a method that prints if a user number is present in the list
             //Remember: What if the user types "abc" accident your app should handle that!
+            bool canParse;
+            int searchNumber;
+            do
+            {
             Console.WriteLine("What number will you search for in the number list?");
-            int searchNumber = 62;
+            canParse = int.TryParse(Console.ReadLine(), out searchNumber);
+            } while (canParse == false);
+
             NumberChecker(numberList, searchNumber);
+
             Console.WriteLine("-------------------");
 
             Console.WriteLine("All Numbers:");
@@ -130,7 +141,7 @@ namespace CollectionsMasterConsoleUI
 
         private static void OddKiller(List<int> numberList)
         {
-            for (int i = numberList.Count - 1; i >= 0; i--)
+            for (int i = numberList.Count - 1; i >= 0; i--) //Starting at the end allows the indexing not to change so that numbers aren't replaced in the list when removed
             {
                 if (numberList[i] % 2 != 0)
                 {
